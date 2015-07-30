@@ -1,10 +1,10 @@
 
 public class Card {
 	
-	public static int HEARTS = 0;
-	public static int spades = 1;
-	public static int diamonds = 2;
-	public static int clubs = 3;
+	public static final int HEARTS = 0;
+	public static final int SPADES = 1;
+	public static final int DIAMONDS = 2;
+	public static final int CLUBS = 3;
 
 	private int value;
 	
@@ -20,8 +20,16 @@ public class Card {
 		return value/13;
 	}
 
-	public int getValues() {
+	public int getRank() {
 		return value%13;
+	}
+	
+	public boolean isSameSuite (Card card) {
+		return (this.getSuit() == card.getSuit());
+	}
+	
+	public boolean isSameRank (Card card) {
+		return (this.getRank() == card.getRank());
 	}
 	
 	public boolean isPrev(Card card){
