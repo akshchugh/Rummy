@@ -1,25 +1,29 @@
 
 public class Card {
 	
-	public static char HEARTS = 'h';
-	public static char spades = 's';
-	public static char diamonds = 'd';
-	public static char clubs = 'c';
+	public static int HEARTS = 0;
+	public static int spades = 1;
+	public static int diamonds = 2;
+	public static int clubs = 3;
 
-	private char suit;
-	private char values;
+	private int value;
 	
-	public Card(char suit, char values) {
-		this.suit = suit;
-		this.values = values;
+	public Card(int value) {
+		this.value = value;
+	}
+	
+	public boolean equals(Card obj) {
+		return this.value == obj.value;
 	}
 
-	public char getSuit() {
-		return suit;
+	public int getSuit() {
+		return value/13;
 	}
 
-	public char getValues() {
-		return values;
+	public int getValues() {
+		return value%13;
 	}
+	
+	
 
 }
