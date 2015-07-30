@@ -33,10 +33,10 @@ public class Card {
 	}
 	
 	public boolean isPrev(Card card){
-		return (this.value - card.value == 1);
+		return (isSameSuite(card) && (this.value - card.value == 1 || card.value - 12 == this.value));
 	}
 
 	public boolean isNext(Card card){
-		return (card.value - this.value == 1); 
+		return (isSameSuite(card) && (card.value - this.value == 1 || this.value - 12 == card.value)); 
 	}
 }
