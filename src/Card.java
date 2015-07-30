@@ -45,10 +45,15 @@ public class Card implements Comparable<Card>{
 	public boolean isJoker() {
 		return (value == JOKER);
 	}
-
-
+	
 	public int compareTo(Card card) {
 		return Integer.compare(this.value, card.value);
+	}
+	
+	@Override
+	public String toString() {
+		String suit[] = {"hearts","spades", "diamonds", "clubs"};
+		return suit[getSuit()] + getRank();
 	}
 	
 	
