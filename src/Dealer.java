@@ -22,7 +22,7 @@ public class Dealer {
 			} while (usedcards.contains(card));
 
 			usedcards.add(card);
-			hand.add(new Card(card % 3));
+			hand.add(new Card(card % NCARDS));
 		}
 
 		return hand;
