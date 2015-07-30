@@ -21,6 +21,8 @@ public class Dealer {
 				card = random.nextInt(NCARDS * 3);
 			} while (usedcards.contains(card));
 
+			System.err.println(i+"-"+card+ "--" + card % NCARDS);
+			
 			usedcards.add(card);
 			hand.add(new Card(card % NCARDS));
 		}

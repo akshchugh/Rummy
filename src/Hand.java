@@ -11,7 +11,6 @@ public class Hand {
 	}
 
 	public void add(Card card) {
-		if(cards.size() <= NCARDS)
 			cards.add(card);
 	}
 	

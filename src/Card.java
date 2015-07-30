@@ -52,7 +52,8 @@ public class Card implements Comparable<Card>{
 	
 	@Override
 	public String toString() {
-		String suit[] = {"hearts","spades", "diamonds", "clubs"};
+		String suit[] = {"H","S", "D", "C", "Joker"};
+		String rank[] = {"A","2", "3", "4", "5", "6", "7", "8", "9", "10" ,"J", "Q", "K"};
 		return suit[getSuit()] + getRank();
 	}
 	
