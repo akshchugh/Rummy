@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Dealer {
-	private static final int NCHARDS = 63;
+	private static final int NCARDS = 53;
 	ArrayList<Integer> usedcards;
 	Random random;
 
@@ -18,7 +18,7 @@ public class Dealer {
 			int card;
 
 			do {
-				card = random.nextInt(NCHARDS * 3);
+				card = random.nextInt(NCARDS * 3);
 			} while (usedcards.contains(card));
 
 			usedcards.add(card);
