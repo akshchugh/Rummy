@@ -12,8 +12,8 @@ public class Card {
 		this.value = value;
 	}
 	
-	public boolean equals(Card obj) {
-		return this.value == obj.value;
+	public boolean equals(Card card) {
+		return this.value == card.value;
 	}
 
 	public int getSuit() {
@@ -24,6 +24,11 @@ public class Card {
 		return value%13;
 	}
 	
-	
+	public boolean isPrev(Card card){
+		return (this.value - card.value == 1);
+	}
 
+	public boolean isNext(Card card){
+		return (card.value - this.value == 1); 
+	}
 }
