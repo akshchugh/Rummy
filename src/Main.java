@@ -10,6 +10,7 @@ public class Main {
 		
 		Hand rummyHand = rummyDealer.getHand();
 		
+		rummyHand.print();
 		System.out.println(rummyHand.minWinMoves());
 		
 	}
