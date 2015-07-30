@@ -1,11 +1,13 @@
 
-public class Card {
+public class Card implements Comparable<Card>{
 	
 	public static final int HEARTS = 0;
 	public static final int SPADES = 1;
 	public static final int DIAMONDS = 2;
 	public static final int CLUBS = 3;
 
+	private static final int JOKER = 53;
+	
 	private int value;
 	
 	public Card(int value) {
@@ -39,4 +41,15 @@ public class Card {
 	public boolean isNext(Card card){
 		return (isSameSuite(card) && (card.value - this.value == 1 || this.value - 12 == card.value)); 
 	}
+	
+	public boolean isJoker() {
+		return (value == JOKER);
+	}
+
+
+	public int compareTo(Card card) {
+		return Integer.compare(this.value, card.value);
+	}
+	
+	
 }
