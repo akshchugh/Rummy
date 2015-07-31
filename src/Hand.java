@@ -61,11 +61,7 @@ public class Hand {
 				break;
 			}
 		}
-
-		if (tripletCards.size() >= 3)
-			return tripletCards;
-		else
-			return null;
+		return tripletCards;
 	}
 
 	public void removeSequences() {
