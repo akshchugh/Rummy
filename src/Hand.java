@@ -5,13 +5,15 @@ public class Hand {
 
 	private ArrayList<Card> normalCards;
 	private ArrayList<Card> jokers;
+	
+	private ArrayList<Card> done;
 
 	// private int numOf
 
 	public Hand() {
 		normalCards = new ArrayList<Card>();
 		jokers = new ArrayList<Card>();
-
+		done = new ArrayList<Card>();
 	}
 
 	public void add(Card card) {
@@ -37,10 +39,7 @@ public class Hand {
 				break;
 			}
 		}
-
-		/*
-		 * for (Card card : seqCards) { System.err.print("->"+card); }
-		 */
+		
 		if (seqCards.size() >= 3)
 			return seqCards;
 		else
@@ -67,9 +66,6 @@ public class Hand {
 			}
 		}
 
-		for (Card card : tripletCards) {
-			System.err.print("->" + card);
-		}
 		if (tripletCards.size() >= 3)
 			return tripletCards;
 		else
@@ -84,9 +80,10 @@ public class Hand {
 
 			ArrayList<Card> sequence = getSequenceStartingAt(sortedCards, i);
 			
-			if (sequence != null)
+			if (sequence != null) {
+				done.addAll(sequence);
 				normalCards.removeAll(sequence);
-			
+			}
 		}
 	}
 
@@ -97,8 +94,10 @@ public class Hand {
 		for (int i = 0; i < sortedCards.size(); i++) {
 			ArrayList<Card> triplet = getTripletStartingAt(sortedCards, i);
 			
-			if (triplet != null)
+			if (triplet != null) {
+				done.addAll(triplet);
 				normalCards.removeAll(triplet);
+			}
 		}
 	}
 
@@ -107,9 +106,15 @@ public class Hand {
 		ArrayList<Card> sortedCards = sort();
 		for (int i = 0; i < sortedCards.size() - 2; i++) {
 			if (isCanasta(sortedCards, i)) {
-				normalCards.remove(sortedCards.get(i));
-				normalCards.remove(sortedCards.get(i+1));
-				normalCards.remove(sortedCards.get(i+2));
+				
+				Card currCard = sortedCards.get(i);
+				done.add(currCard);
+				done.add(currCard);
+				done.add(currCard);
+				
+				normalCards.remove(currCard);
+				normalCards.remove(currCard);
+				normalCards.remove(currCard);
 				i += 2;
 			}
 		}
@@ -126,8 +131,13 @@ public class Hand {
 
 	public int minWinMoves() {
 		// TODO
+		print();
+		removeAllCanasta();
+		print();
 		removeSequences();
+		print();
 		removeTriplets();
+		print();
 		return 0;
 	}
 
