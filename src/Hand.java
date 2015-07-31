@@ -6,12 +6,13 @@ public class Hand {
 	private ArrayList<Card> normalCards;
 	private ArrayList<Card> jokers;
 
-	private ArrayList<ArrayList<Card> > naturalSeq;
+	private ArrayList<ArrayList<Card>> naturalSeq;
 	private int numOfSeq;
 	private int numOfGroup;
 	private int numOfTriplets;
 	private int numOfQuadruples;
-	//private int numOf
+
+	// private int numOf
 
 	public Hand() {
 		normalCards = new ArrayList<Card>();
@@ -33,100 +34,106 @@ public class Hand {
 			normalCards.add(card);
 	}
 
-	private ArrayList<Card> getSequenceStartingAt(ArrayList<Card> cards, int start) {
+	private ArrayList<Card> getSequenceStartingAt(ArrayList<Card> cards,
+			int start) {
 
 		ArrayList<Card> seqCards = new ArrayList<Card>();
 		seqCards.add(cards.get(start));
 
-		for (int i = start; i< cards.size()-1; i++) {
-			if(cards.get(i).equals(cards.get(i+1))){
+		for (int i = start; i < cards.size() - 1; i++) {
+			if (cards.get(i).equals(cards.get(i + 1))) {
 				continue;
 			}
-			if (cards.get(i).isNext(cards.get(i+1))) {
-				seqCards.add(cards.get(i+1));
+			if (cards.get(i).isNext(cards.get(i + 1))) {
+				seqCards.add(cards.get(i + 1));
 			} else {
 				break;
 			}
 		}
 
-		for (Card card : seqCards) {
-			System.err.print("->"+card);
-		}
-		if (seqCards.size()>=3)
+		/*
+		 * for (Card card : seqCards) { System.err.print("->"+card); }
+		 */
+		if (seqCards.size() >= 3)
 			return seqCards;
 		else
 			return null;
 	}
-	
-	private ArrayList<Card> getTripletStartingAt(ArrayList<Card> cards, int start){
-		
+
+	private ArrayList<Card> getTripletStartingAt(ArrayList<Card> cards,
+			int start) {
+
 		ArrayList<Card> tripletCards = new ArrayList<Card>();
 		tripletCards.add(cards.get(start));
-		
-		for (int i = start; i< cards.size()-1; i++) {
-			if(cards.get(i).equals(cards.get(i+1))){
-				if(cards.get(i).isDifferentSuit(cards.get(i+1))){
-					tripletCards.add(cards.get(i+1));
+
+		for (int i = start; i < cards.size() - 1; i++) {
+			Card currCard = cards.get(i);
+			Card nextCard = cards.get(i + 1);
+			if (currCard.isSameRank(nextCard)) {
+
+				if (currCard.isDifferentSuit(nextCard)) {
+					tripletCards.add(nextCard);
 				}
-			}
-			else {
+				
+			} else {
 				break;
 			}
 		}
-		
+
 		for (Card card : tripletCards) {
-			System.err.print("->"+card);
+			System.err.print("->" + card);
 		}
-		if (tripletCards.size()>=3)
+		if (tripletCards.size() >= 3)
 			return tripletCards;
 		else
 			return null;
 	}
-	
-	public void computenumberofsequences() {
-		
-		ArrayList<Card> sortedCards = sort();
 
-		print();
+	public void computenumberofsequences() {
+
+		ArrayList<Card> sortedCards = sort();
 
 		for (int i = 0; i < sortedCards.size(); i++) {
 
 			getSequenceStartingAt(sortedCards, i);
-			System.err.println();
+			// System.err.println();
 		}
 	}
+
 	public void getAllCanasta() {
-		ArrayList<Card> sortedCards =sort();
+		ArrayList<Card> sortedCards = sort();
 		print();
-		for (int i = 0; i < sortedCards.size()-2; i++) {
+		for (int i = 0; i < sortedCards.size() - 2; i++) {
 			ArrayList<Card> canastaCards = new ArrayList<Card>();
-			if(isCanasta(sortedCards, i)) {
+			if (isCanasta(sortedCards, i)) {
 				canastaCards.add(sortedCards.get(i));
 				canastaCards.add(sortedCards.get(i + 1));
 				canastaCards.add(sortedCards.get(i + 2));
-				System.err.println();}
+				System.err.println();
 			}
-			
+		}
+
 	}
+
 	private boolean isCanasta(ArrayList<Card> cards, int start) {
-		if (cards.get(start).equals(cards.get(start + 1 )) && cards.get(start).equals(cards.get(start + 2))) {
-				return true;
+		if (cards.get(start).equals(cards.get(start + 1))
+				&& cards.get(start).equals(cards.get(start + 2))) {
+			return true;
 		}
 		return false;
 	}
-	public void computeTriplets(){
-		
-		ArrayList<Card> sortedCards = sort();
-		
-		print();
-		
+
+	public void computeTriplets() {
+
+		ArrayList<Card> sortedCards = sortByRank();
+
 		for (int i = 0; i < sortedCards.size(); i++) {
-			
+
 			getTripletStartingAt(sortedCards, i);
 			System.err.println();
 		}
 	}
-	
+
 	public int minWinMoves() {
 		// TODO
 		computenumberofsequences();
@@ -141,23 +148,22 @@ public class Hand {
 		System.out.println();
 	}
 
-	private ArrayList<Card> sort(){
+	private ArrayList<Card> sort() {
 		ArrayList<Card> cards = (ArrayList<Card>) normalCards.clone();
 		Collections.sort(cards);
 		normalCards = cards;
 		return cards;
 	}
 
-
-	private ArrayList<Card> sortByRank(){
+	private ArrayList<Card> sortByRank() {
 		ArrayList<Card> cards = (ArrayList<Card>) normalCards.clone();
-		Collections.sort(cards,Card.rankComparator());
+		Collections.sort(cards, Card.rankComparator());
 		return cards;
 	}
 
-	private ArrayList<Card> sortBySuit(){
+	private ArrayList<Card> sortBySuit() {
 		ArrayList<Card> cards = (ArrayList<Card>) normalCards.clone();
-		Collections.sort(cards,Card.suitComparator());
+		Collections.sort(cards, Card.suitComparator());
 		return cards;
 	}
 

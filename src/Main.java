@@ -12,7 +12,7 @@ public class Main {
 		Hand rummyHand = rummyDealer.getHand(NCARDS);
 		
 		rummyHand.print();
-		rummyHand.computenumberofsequences();
+		rummyHand.minWinMoves();
 		rummyHand.print();
 	}
 
