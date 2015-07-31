@@ -57,7 +57,34 @@ public class Hand {
 		else
 			return null;
 	}
+	
+	private ArrayList<Card> getTripletStartingAt(ArrayList<Card> cards, int start){
+		
+		ArrayList<Card> seqCards = new ArrayList<Card>();
+		tripletCards.add(cards.get(start));
+		
+		for (int i = start; i< cards.size()-1; i++) {
+			if(cards.get(i).equals(cards.get(i+1))){
+				if(cards.get(i).isDifferentSuit(cards.get(i+1))){
+					tripletCards.add(cards.get(i+1));
+				}
+			}
+			else {
+				break;
+			}
+		}
+		
+		for (Card card : tripletCards) {
+			System.err.print("->"+card);
+		}
+		if (tripletCards.size()>=3)
+			return tripletCards;
+		else
+			return null;
+	}
+	
 	public void computenumberofsequences() {
+		
 		ArrayList<Card> sortedCards = sort();
 		
 		print();
@@ -66,29 +93,26 @@ public class Hand {
 			
 			getSequenceStartingAt(sortedCards, i);
 			System.err.println();
-			
-			/*
-			if(isSequence(sortedCards,i,3)) {
-				numOfSeq+=1;
-				numOfNaturalSeq +=1;
-			}
-			if(isSequence(sortedCards,i,4)) {
-				numOfSeq+=1;
-				numOfNaturalSeq +=1;
-			}
-			if(isSequence(sortedCards,i,5)) {
-				numOfSeq+=1;	
-				numOfNaturalSeq +=1;
-			}
-			*/
 		}
 	}
 
-	
+	public void computeTriplets(){
+		
+		ArrayList<Card> sortedCards = sort();
+		
+		print();
+		
+		for (int i = 0; i < sortedCards.size(); i++) {
+			
+			getTripletStartingAt(sortedCards, i);
+			System.err.println();
+		}
+	}
 	
 	public int minWinMoves() {
 		// TODO
 		computenumberofsequences();
+		computeTriplets();
 		return 0;
 	}
 
