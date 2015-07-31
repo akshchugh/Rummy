@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 
 public class Hand {
 
@@ -58,6 +57,8 @@ public class Hand {
 		}
 	}
 
+	
+	
 	public int minWinMoves() {
 		// TODO
 		return 0;
@@ -70,17 +71,23 @@ public class Hand {
 		System.out.println();
 	}
 	
-	private void sort(){
-		Collections.sort(normalCards);
+	private ArrayList<Card> sort(){
+		ArrayList<Card> cards = (ArrayList<Card>) normalCards.clone();
+		Collections.sort(cards);
+		return cards;
 	}
 	
 	
-	private void sortByRank(){
-		Collections.sort(normalCards,Card.rankComparator());
+	private ArrayList<Card> sortByRank(){
+		ArrayList<Card> cards = (ArrayList<Card>) normalCards.clone();
+		Collections.sort(cards,Card.rankComparator());
+		return cards;
 	}
 	
-	private void sortBySuit(){
-		Collections.sort(normalCards,Card.suitComparator());
+	private ArrayList<Card> sortBySuit(){
+		ArrayList<Card> cards = (ArrayList<Card>) normalCards.clone();
+		Collections.sort(cards,Card.suitComparator());
+		return cards;
 	}
 	
 }
