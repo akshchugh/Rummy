@@ -13,7 +13,6 @@ public class Main {
 		
 		rummyHand.print();
 		rummyHand.computenumberofsequences();
-		System.err.println("test");
 		rummyHand.print();
 	}
 

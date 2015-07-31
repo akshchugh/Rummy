@@ -23,6 +23,11 @@ public class Card implements Comparable<Card>{
 	public boolean equals(Card card) {
 		return this.value == card.value;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		return equals((Card)obj);
+	}
 
 	public int getSuit() {
 		
@@ -85,5 +90,12 @@ public class Card implements Comparable<Card>{
 		});
 	}
 	
+	Card getNextCard(){
+		return new Card((this.suit)*13+(this.rank+1)%13);
+	}
+	
+	Card getPrevCard(){
+		return new Card((this.suit)*13+(this.rank-1)%13);
+	}
 	
 }
