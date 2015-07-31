@@ -121,6 +121,23 @@ public class Hand {
 		return false;
 	}
 
+	private void removeCanastaPair(ArrayList<Card> cards) {
+		for (int i = 0; i < cards.size()-1; i++) {
+			if (isCanastaPair(cards, i)) {
+				cards.remove(cards.get(i));
+				cards.remove(cards.get(i));
+				i++;
+			}
+		}
+	}
+	
+	private boolean isCanastaPair(ArrayList<Card> cards, int start) {
+		if (cards.get(start).equals(cards.get(start + 1))) {
+			return true;
+		}
+		return false;
+	}
+	
 	public int minWinMoves() {
 		// TODO
 		print();
