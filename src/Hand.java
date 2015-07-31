@@ -39,12 +39,8 @@ public class Hand {
 				break;
 			}
 		}
-		
-		if (seqCards.size() >= 3)
-			return seqCards;
-		else
-			return null;
-	}
+		return seqCards;
+		}
 
 	private ArrayList<Card> getTripletStartingAt(ArrayList<Card> cards,
 			int start) {
@@ -80,7 +76,7 @@ public class Hand {
 
 			ArrayList<Card> sequence = getSequenceStartingAt(sortedCards, i);
 			
-			if (sequence != null) {
+			if (sequence.size() >= 3) {
 				done.addAll(sequence);
 				normalCards.removeAll(sequence);
 			}
@@ -94,7 +90,7 @@ public class Hand {
 		for (int i = 0; i < sortedCards.size(); i++) {
 			ArrayList<Card> triplet = getTripletStartingAt(sortedCards, i);
 			
-			if (triplet != null) {
+			if (triplet.size() >= 3) {
 				done.addAll(triplet);
 				normalCards.removeAll(triplet);
 			}
