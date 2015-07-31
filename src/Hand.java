@@ -23,5 +23,6 @@ public class Hand {
 		for (Card card : cards) {
 			System.out.print(card+ ", ");
 		}
+		System.out.println();
 	}
 }

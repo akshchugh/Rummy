@@ -6,7 +6,7 @@ public class Card implements Comparable<Card>{
 	public static final int DIAMONDS = 2;
 	public static final int CLUBS = 3;
 
-	private static final int JOKER = 53;
+	private static final int JOKER = 52;
 	
 	private int value;
 	
@@ -54,7 +54,7 @@ public class Card implements Comparable<Card>{
 	public String toString() {
 		String suit[] = {"H","S", "D", "C", "Joker"};
 		String rank[] = {"A","2", "3", "4", "5", "6", "7", "8", "9", "10" ,"J", "Q", "K"};
-		return suit[getSuit()] + getRank();
+		return suit[getSuit()] +"-"+  rank[getRank()];
 	}
 	
 	
