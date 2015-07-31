@@ -11,10 +11,10 @@ public class Dealer {
 		usedcards = new ArrayList<Integer>();
 	}
 
-	public Hand getHand() {
+	public Hand getHand(int nCardsInHand) {
 		Hand hand = new Hand();
 
-		for (int i = 0; i < 13; i++) {
+		for (int i = 0; i < nCardsInHand; i++) {
 			int card;
 
 			do {

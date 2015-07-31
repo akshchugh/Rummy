@@ -1,3 +1,5 @@
+import java.util.Comparator;
+
 
 public class Card implements Comparable<Card>{
 	
@@ -61,6 +63,26 @@ public class Card implements Comparable<Card>{
 		String suit[] = {"H","S", "D", "C", "Joker"};
 		String rank[] = {"A","2", "3", "4", "5", "6", "7", "8", "9", "10" ,"J", "Q", "K"};
 		return suit[getSuit()] +"-"+  rank[getRank()];
+	}
+	
+	public static Comparator<Card> rankComparator() {
+		return (new Comparator<Card>() {
+
+			public int compare(Card o1, Card o2) {
+				return ((Integer) o1.getRank()).compareTo(o2.getRank());
+			}
+			
+		});
+	}
+	
+	public static Comparator<Card> suitComparator() {
+		return (new Comparator<Card>() {
+
+			public int compare(Card o1, Card o2) {
+				return ((Integer) o1.getSuit()).compareTo(o2.getSuit());
+			}
+			
+		});
 	}
 	
 	
