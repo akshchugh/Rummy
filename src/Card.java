@@ -29,6 +29,10 @@ public class Card implements Comparable<Card>{
 		return equals((Card)obj);
 	}
 
+	public boolean isDifferentSuit(Card card){
+		return this.suit != card.suit;
+	}
+
 	public int getSuit() {
 		
 		return suit;
