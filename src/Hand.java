@@ -76,7 +76,7 @@ public class Hand {
 			return null;
 	}
 
-	public void computenumberofsequences() {
+	public void removeSequences() {
 
 		ArrayList<Card> sortedCards = sort();
 
@@ -87,17 +87,24 @@ public class Hand {
 		}
 	}
 
-	public void getAllCanasta() {
+	public void removeTriplets() {
+
+		ArrayList<Card> sortedCards = sortByRank();
+
+		for (int i = 0; i < sortedCards.size(); i++) {
+			getTripletStartingAt(sortedCards, i);
+		}
+	}
+
+	
+	public void removeAllCanasta() {
 		ArrayList<Card> sortedCards = sort();
 		for (int i = 0; i < sortedCards.size() - 2; i++) {
-			ArrayList<Card> canastaCards = new ArrayList<Card>();
 			if (isCanasta(sortedCards, i)) {
-				canastaCards.add(sortedCards.get(i));
-				canastaCards.add(sortedCards.get(i + 1));
-				canastaCards.add(sortedCards.get(i + 2));
-			}
-			for (Card card : canastaCards) {
-				System.err.print(card + "-c-");
+				normalCards.remove(sortedCards.get(i));
+				normalCards.remove(sortedCards.get(i+1));
+				normalCards.remove(sortedCards.get(i+2));
+				i += 2;
 			}
 		}
 
@@ -111,21 +118,10 @@ public class Hand {
 		return false;
 	}
 
-	public void computeTriplets() {
-
-		ArrayList<Card> sortedCards = sortByRank();
-
-		for (int i = 0; i < sortedCards.size(); i++) {
-
-			getTripletStartingAt(sortedCards, i);
-			System.err.println();
-		}
-	}
-
 	public int minWinMoves() {
 		// TODO
-		computenumberofsequences();
-		computeTriplets();
+		removeSequences();
+		removeTriplets();
 		return 0;
 	}
 
