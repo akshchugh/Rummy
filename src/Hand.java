@@ -82,8 +82,11 @@ public class Hand {
 
 		for (int i = 0; i < sortedCards.size(); i++) {
 
-			getSequenceStartingAt(sortedCards, i);
-			// System.err.println();
+			ArrayList<Card> sequence = getSequenceStartingAt(sortedCards, i);
+			
+			if (sequence != null)
+				normalCards.removeAll(sequence);
+			
 		}
 	}
 
@@ -92,7 +95,10 @@ public class Hand {
 		ArrayList<Card> sortedCards = sortByRank();
 
 		for (int i = 0; i < sortedCards.size(); i++) {
-			getTripletStartingAt(sortedCards, i);
+			ArrayList<Card> triplet = getTripletStartingAt(sortedCards, i);
+			
+			if (triplet != null)
+				normalCards.removeAll(triplet);
 		}
 	}
 
