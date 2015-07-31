@@ -23,6 +23,10 @@ public class Card implements Comparable<Card>{
 	public boolean equals(Card card) {
 		return this.value == card.value;
 	}
+	
+	public boolean isDifferentSuit(Card card){
+		return this.suit != card.suit;
+	}
 
 	public int getSuit() {
 		
