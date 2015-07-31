@@ -43,11 +43,11 @@ public class Card implements Comparable<Card>{
 	}
 	
 	public boolean isPrev(Card card){
-		return (isSameSuite(card) && (this.value - card.value == 1 || card.value - 12 == this.value));
+		return (isSameSuite(card) && (this.rank - card.rank) % 13 == 1);
 	}
 
 	public boolean isNext(Card card){
-		return (isSameSuite(card) && (card.value - this.value == 1 || this.value - 12 == card.value)); 
+		return (isSameSuite(card) && (card.rank - this.rank) % 13 == 1); 
 	}
 	
 	public boolean isJoker() {

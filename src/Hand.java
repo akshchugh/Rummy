@@ -5,7 +5,8 @@ public class Hand {
 
 	private ArrayList<Card> normalCards;
 	private ArrayList<Card> jokers;
-	private int numOfNaturalSeq;
+	
+	private ArrayList<ArrayList<Card> > naturalSeq;
 	private int numOfSeq;
 	private int numOfGroup;
 	private int numOfTriplets;
@@ -15,7 +16,9 @@ public class Hand {
 	public Hand() {
 		normalCards = new ArrayList<Card>();
 		jokers = new ArrayList<Card>();
-		this.numOfNaturalSeq = 0;
+		
+		this.naturalSeq = new ArrayList<ArrayList<Card>>();
+		
 		this.numOfSeq = 0;
 		this.numOfGroup = 0;
 		this.numOfTriplets = 0;
@@ -30,30 +33,54 @@ public class Hand {
 			normalCards.add(card);
 	}
 	
-	private boolean isSequence(int start , int end) {
-		for (int i = start; i < end && i< normalCards.size(); i++) {
-			if (!normalCards.get(start).isNext(normalCards.get(end))) {
-				return false;
+	private ArrayList<Card> getSequenceStartingAt(ArrayList<Card> cards, int start) {
+
+		ArrayList<Card> seqCards = new ArrayList<Card>();
+		seqCards.add(cards.get(start));
+		
+		for (int i = start; i< cards.size()-1; i++) {
+			if(cards.get(i).equals(cards.get(i+1))){
+				continue;
+			}
+			if (cards.get(i).isNext(cards.get(i+1))) {
+				seqCards.add(cards.get(i+1));
+			} else {
+				break;
 			}
 		}
-		return true;
+		
+		for (Card card : seqCards) {
+			System.err.print("->"+card);
+		}
+		if (seqCards.size()>=3)
+			return seqCards;
+		else
+			return null;
 	}
 	public void computenumberofsequences() {
-		sort();
-		int i=0;
-		while(i < normalCards.size()) {
-			if(isSequence(i,i+2)) {
-				numOfSeq+=1;	
-				numOfNaturalSeq +=1;
-			}
-			if(isSequence(i,i+3)) {
+		ArrayList<Card> sortedCards = sort();
+		
+		print();
+		
+		for (int i = 0; i < sortedCards.size(); i++) {
+			
+			getSequenceStartingAt(sortedCards, i);
+			System.err.println();
+			
+			/*
+			if(isSequence(sortedCards,i,3)) {
 				numOfSeq+=1;
 				numOfNaturalSeq +=1;
 			}
-			if(isSequence(i,i+4)) {
+			if(isSequence(sortedCards,i,4)) {
+				numOfSeq+=1;
+				numOfNaturalSeq +=1;
+			}
+			if(isSequence(sortedCards,i,5)) {
 				numOfSeq+=1;	
 				numOfNaturalSeq +=1;
 			}
+			*/
 		}
 	}
 
@@ -61,6 +88,7 @@ public class Hand {
 	
 	public int minWinMoves() {
 		// TODO
+		computenumberofsequences();
 		return 0;
 	}
 
@@ -74,6 +102,7 @@ public class Hand {
 	private ArrayList<Card> sort(){
 		ArrayList<Card> cards = (ArrayList<Card>) normalCards.clone();
 		Collections.sort(cards);
+		normalCards = cards;
 		return cards;
 	}
 	
