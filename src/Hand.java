@@ -6,24 +6,11 @@ public class Hand {
 	private ArrayList<Card> normalCards;
 	private ArrayList<Card> jokers;
 
-	private ArrayList<ArrayList<Card>> naturalSeq;
-	private int numOfSeq;
-	private int numOfGroup;
-	private int numOfTriplets;
-	private int numOfQuadruples;
-
 	// private int numOf
 
 	public Hand() {
 		normalCards = new ArrayList<Card>();
 		jokers = new ArrayList<Card>();
-
-		this.naturalSeq = new ArrayList<ArrayList<Card>>();
-
-		this.numOfSeq = 0;
-		this.numOfGroup = 0;
-		this.numOfTriplets = 0;
-		this.numOfQuadruples = 0;
 
 	}
 
@@ -74,7 +61,7 @@ public class Hand {
 				if (currCard.isDifferentSuit(nextCard)) {
 					tripletCards.add(nextCard);
 				}
-				
+
 			} else {
 				break;
 			}
@@ -102,14 +89,15 @@ public class Hand {
 
 	public void getAllCanasta() {
 		ArrayList<Card> sortedCards = sort();
-		print();
 		for (int i = 0; i < sortedCards.size() - 2; i++) {
 			ArrayList<Card> canastaCards = new ArrayList<Card>();
 			if (isCanasta(sortedCards, i)) {
 				canastaCards.add(sortedCards.get(i));
 				canastaCards.add(sortedCards.get(i + 1));
 				canastaCards.add(sortedCards.get(i + 2));
-				System.err.println();
+			}
+			for (Card card : canastaCards) {
+				System.err.print(card + "-c-");
 			}
 		}
 
