@@ -9,9 +9,13 @@ public class Card implements Comparable<Card>{
 	private static final int JOKER = 52;
 	
 	private int value;
+	private int suit;
+	private int rank;
 	
 	public Card(int value) {
 		this.value = value;
+		rank = value%13;
+		suit = value/13;
 	}
 	
 	public boolean equals(Card card) {
@@ -19,19 +23,21 @@ public class Card implements Comparable<Card>{
 	}
 
 	public int getSuit() {
-		return value/13;
+		
+		return suit;
 	}
 
 	public int getRank() {
-		return value%13;
+		
+		return rank;
 	}
 	
 	public boolean isSameSuite (Card card) {
-		return (this.getSuit() == card.getSuit());
+		return (this.suit == card.suit);
 	}
 	
 	public boolean isSameRank (Card card) {
-		return (this.getRank() == card.getRank());
+		return (this.rank == card.rank);
 	}
 	
 	public boolean isPrev(Card card){
