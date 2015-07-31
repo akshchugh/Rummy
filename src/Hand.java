@@ -121,7 +121,7 @@ public class Hand {
 		return false;
 	}
 
-	private void removeCanastaPair(ArrayList<Card> cards) {
+	private ArrayList<Card> removeCanastaPair(ArrayList<Card> cards) {
 		for (int i = 0; i < cards.size()-1; i++) {
 			if (isCanastaPair(cards, i)) {
 				cards.remove(cards.get(i));
@@ -129,6 +129,7 @@ public class Hand {
 				i++;
 			}
 		}
+		return cards;
 	}
 	
 	private boolean isCanastaPair(ArrayList<Card> cards, int start) {
@@ -147,6 +148,11 @@ public class Hand {
 		print();
 		removeTriplets();
 		print();
+		
+		ArrayList<Card> cards= (ArrayList<Card>) (normalCards.clone());
+		
+		cards = removeCanastaPair(cards);
+		
 		return 0;
 	}
 
